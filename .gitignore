@@ -11,6 +11,9 @@
 # production
 /build
 
+# En tu archivo .gitignore
+.env
+
 # misc
 .DS_Store
 .env.local
