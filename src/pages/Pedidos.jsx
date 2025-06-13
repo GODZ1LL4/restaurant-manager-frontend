@@ -203,39 +203,43 @@ function Pedidos() {
         <div className="text-center text-sm text-green-600 mb-4">{mensaje}</div>
       )}
 
-      <table className="w-full text-left text-sm">
-        <thead>
-          <tr className="border-b font-semibold text-gray-600">
-            <th>Persona</th>
-            <th>Menú</th>
-            <th>Precio</th>
-            <th>Estado</th>
-            <th>Fecha</th>
-            <th>Fecha Pago</th>
-            <th></th>
+<div className="overflow-x-auto">
+  <table className="w-full text-left text-sm">
+    <thead>
+      <tr className="border-b font-semibold text-gray-600">
+        <th>Persona</th>
+        <th>Menú</th>
+        <th>Precio</th>
+        <th>Estado</th>
+        <th>Fecha</th>
+        <th>Fecha Pago</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {Array.isArray(pedidos) &&
+        pedidos.map((p) => (
+          <tr key={p.id} className="border-b hover:bg-gray-50">
+            <td>{p.persona?.nombre}</td>
+            <td>{p.menu?.nombre}</td>
+            <td>${p.menu?.precio?.toFixed(2)}</td>
+            <td>{p.estado?.descripcion}</td>
+            <td>{p.fecha}</td>
+            <td>{p.fecha_pago || "-"}</td>
+            <td>
+              <button
+                onClick={() => abrirModal(p)}
+                className="text-indigo-600 hover:underline"
+              >
+                Editar
+              </button>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          {Array.isArray(pedidos) && pedidos.map((p) => (
-            <tr key={p.id} className="border-b hover:bg-gray-50">
-              <td>{p.persona?.nombre}</td>
-              <td>{p.menu?.nombre}</td>
-              <td>${p.menu?.precio?.toFixed(2)}</td>
-              <td>{p.estado?.descripcion}</td>
-              <td>{p.fecha}</td>
-              <td>{p.fecha_pago || "-"}</td>
-              <td>
-                <button
-                  onClick={() => abrirModal(p)}
-                  className="text-indigo-600 hover:underline"
-                >
-                  Editar
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+        ))}
+    </tbody>
+  </table>
+</div>
+
 
       {pedidos.length === 0 && (
         <div className="text-center text-gray-500 py-4">
@@ -243,39 +247,42 @@ function Pedidos() {
         </div>
       )}
 
-      <div className="flex items-center justify-between mt-4 text-sm">
-        <button
-          onClick={() => setPaginaActual(1)}
-          disabled={paginaActual === 1}
-          className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
-        >
-          ⏮ Primera
-        </button>
-        <button
-          onClick={() => setPaginaActual((prev) => Math.max(prev - 1, 1))}
-          disabled={paginaActual === 1}
-          className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
-        >
-          ← Anterior
-        </button>
-        <span>
-          Página {paginaActual} de {totalPaginas || 1}
-        </span>
-        <button
-          onClick={() => setPaginaActual((prev) => Math.min(prev + 1, totalPaginas))}
-          disabled={paginaActual >= totalPaginas}
-          className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
-        >
-          Siguiente →
-        </button>
-        <button
-          onClick={() => setPaginaActual(totalPaginas)}
-          disabled={paginaActual >= totalPaginas}
-          className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
-        >
-          Última ⏭
-        </button>
-      </div>
+<div className="overflow-x-auto">
+  <div className="flex items-center justify-between mt-4 text-sm min-w-[600px]">
+    <button
+      onClick={() => setPaginaActual(1)}
+      disabled={paginaActual === 1}
+      className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
+    >
+      ⏮ Primera
+    </button>
+    <button
+      onClick={() => setPaginaActual((prev) => Math.max(prev - 1, 1))}
+      disabled={paginaActual === 1}
+      className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
+    >
+      ← Anterior
+    </button>
+    <span>
+      Página {paginaActual} de {totalPaginas || 1}
+    </span>
+    <button
+      onClick={() => setPaginaActual((prev) => Math.min(prev + 1, totalPaginas))}
+      disabled={paginaActual >= totalPaginas}
+      className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
+    >
+      Siguiente →
+    </button>
+    <button
+      onClick={() => setPaginaActual(totalPaginas)}
+      disabled={paginaActual >= totalPaginas}
+      className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
+    >
+      Última ⏭
+    </button>
+  </div>
+</div>
+
 
       {mostrarModal && pedidoSeleccionado && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
