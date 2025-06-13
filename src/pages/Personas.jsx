@@ -37,17 +37,20 @@ function Personas() {
         👤 Lista de Personas
       </h2>
 
-      <form onSubmit={manejarSubmit} className="flex flex-wrap gap-2 mb-4">
+      <form
+        onSubmit={manejarSubmit}
+        className="flex flex-row sm:flex-nowrap flex-wrap items-center gap-2 mb-4"
+      >
         <input
           type="text"
           placeholder="Nombre"
           value={nuevaPersona}
           onChange={(e) => setNuevaPersona(e.target.value)}
-          className="flex-1 border rounded px-3 py-2"
+          className="flex-1 min-w-0 border rounded px-3 py-2"
         />
         <button
           type="submit"
-          className="bg-blue-600 text-white px-4 rounded hover:bg-blue-700"
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 whitespace-nowrap"
         >
           Agregar
         </button>

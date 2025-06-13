@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { getPagos, addPago, getPedidos, getMenu, getPagosPaginado } from "../services/api";
+import {
+  getPagos,
+  addPago,
+  getPedidos,
+  getMenu,
+  getPagosPaginado,
+} from "../services/api";
 
 function Pagos() {
   const [paginaActual, setPaginaActual] = useState(1);
@@ -175,41 +181,50 @@ function Pagos() {
           ))}
         </tbody>
       </table>
-      <div className="flex items-center justify-between mt-4 text-sm">
-        <button
-          onClick={() => setPaginaActual(1)}
-          disabled={paginaActual === 1}
-          className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
-        >
-          ⏮ Primera
-        </button>
-        <button
-          onClick={() => setPaginaActual((prev) => Math.max(prev - 1, 1))}
-          disabled={paginaActual === 1}
-          className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
-        >
-          ← Anterior
-        </button>
-        <span>
-          Página {paginaActual} de {totalPaginas || 1}
-        </span>
-        <button
-          onClick={() =>
-            setPaginaActual((prev) => Math.min(prev + 1, totalPaginas))
-          }
-          disabled={paginaActual >= totalPaginas}
-          className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
-        >
-          Siguiente →
-        </button>
-        <button
-          onClick={() => setPaginaActual(totalPaginas)}
-          disabled={paginaActual >= totalPaginas}
-          className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
-        >
-          Última ⏭
-        </button>
-      </div>
+      <div className="mt-4 overflow-x-auto">
+  <div className="flex flex-wrap justify-center items-center gap-2 text-sm w-full">
+    <button
+      onClick={() => setPaginaActual(1)}
+      disabled={paginaActual === 1}
+      className="w-8 h-8 bg-gray-200 rounded flex items-center justify-center disabled:opacity-50"
+      title="Primera"
+    >
+      ⏮
+    </button>
+    <button
+      onClick={() => setPaginaActual((prev) => Math.max(prev - 1, 1))}
+      disabled={paginaActual === 1}
+      className="w-8 h-8 bg-gray-200 rounded flex items-center justify-center disabled:opacity-50"
+      title="Anterior"
+    >
+      ←
+    </button>
+    <span className="text-gray-600 font-medium px-2 whitespace-nowrap">
+      {paginaActual} / {totalPaginas || 1}
+    </span>
+    <button
+      onClick={() =>
+        setPaginaActual((prev) => Math.min(prev + 1, totalPaginas))
+      }
+      disabled={paginaActual >= totalPaginas}
+      className="w-8 h-8 bg-gray-200 rounded flex items-center justify-center disabled:opacity-50"
+      title="Siguiente"
+    >
+      →
+    </button>
+    <button
+      onClick={() => setPaginaActual(totalPaginas)}
+      disabled={paginaActual >= totalPaginas}
+      className="w-8 h-8 bg-gray-200 rounded flex items-center justify-center disabled:opacity-50"
+      title="Última"
+    >
+      ⏭
+    </button>
+  </div>
+</div>
+
+
+
     </div>
   );
 }
