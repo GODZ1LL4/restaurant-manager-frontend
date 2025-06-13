@@ -16,9 +16,9 @@ function App() {
       <Navbar />
       <div className="p-4 bg-gray-100 min-h-screen">
         <Routes>
-          <Route path="/" element={<Personas />} />
+          <Route path="/personas" element={<Personas />} />
           <Route path="/menu" element={<Menu />} />
-          <Route path="/pedidos" element={<Pedidos />} />
+          <Route path="/" element={<Pedidos />} />
           <Route path="/estados" element={<Estados />} />
           <Route path="/deudas" element={<Deudas />} />
           <Route path="/pagos" element={<Pagos />} />
